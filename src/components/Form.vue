@@ -37,6 +37,9 @@
           <old-first-name v-model="oldFirstName"/>
         </div>
       </fieldset>
+      <fieldset>
+        <citizenship-custom @input="changeHandler"/>
+      </fieldset>
     </form>
   </div>
 </template>
@@ -61,6 +64,7 @@ import InoFirstName from '@/components/Passport Data/Other/InoFirstName.vue';
 import InoNumberPassport from '@/components/Passport Data/Other/InoNumberPassport.vue';
 import InoCountryIssue from '@/components/Passport Data/Other/InoCountryIssue.vue';
 import InoTypePassport from '@/components/Passport Data/Other/InoTypePassport.vue';
+import CitizenshipCustom from '@//components/Passport Data/CitizenshipCustom.vue';
 
 export default {
   components: { 
@@ -69,7 +73,7 @@ export default {
     Citizenship, Question, OldSurName, OldFirstName,
     SerialPassport, NumberPassport, DataIssuePassport,
     InoSurName, InoFirstName, InoNumberPassport, InoCountryIssue,
-    InoTypePassport
+    InoTypePassport, CitizenshipCustom
   },
   data() {
     return {
@@ -91,9 +95,13 @@ export default {
       inoNumberPassport: '',
       inoCountryIssue: '',
       inoTypePassport: '',
+      citizenshipCustom: '',
     }
   },
   methods: {
+    changeHandler(val){
+      this.citizenshipCustom = val;
+    }
   },
 };
 </script>
