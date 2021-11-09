@@ -2,7 +2,7 @@
   <div class="serial-passport">
     <label for="serialpassport">Серия паспорта</label> 
     <br>
-    <input type="text" id="serialpassport"
+    <input type="number" id="serialpassport"
       @input="$emit('input',$event.target.value)"
     >
   </div>
@@ -10,10 +10,10 @@
 
 <script>
 export default {
-  name: 'SerialPassport'
+  name: 'SerialPassport',
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

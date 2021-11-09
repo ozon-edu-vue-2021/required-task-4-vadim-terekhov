@@ -1,6 +1,6 @@
 <template>
   <div class="old-sur-name">
-    <label for="oldsurname">Фамилия</label> 
+    <label for="oldsurname">Фамилия (прошлая)</label> 
     <br>
     <input type="text" id="oldsurname"
       :value="value"

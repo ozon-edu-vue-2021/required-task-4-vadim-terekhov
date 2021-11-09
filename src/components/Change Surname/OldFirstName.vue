@@ -1,6 +1,6 @@
 <template>
   <div class="first-sur-name">
-    <label for="firstsurname">Имя</label> 
+    <label for="firstsurname">Имя (прошлое)</label> 
     <br>
     <input type="text" id="firstsurname"
       :value="value"
