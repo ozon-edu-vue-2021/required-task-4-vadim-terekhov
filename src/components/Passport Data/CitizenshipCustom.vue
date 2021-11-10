@@ -1,7 +1,7 @@
 <template>
   <div class="custom-citizenship" v-click-outside="hideSelectMenu">
-      <label for="customcitizenship">Гражданство </label>
-      <input type="text" id="customcitizenship"
+      <label for="customcitizenship">Гражданство </label><br>
+      <input type="text" id="customcitizenship" class="input-all"
         @focus="isShowSelectMenu = true"
         v-model="searchWord"
         @input="$emit('input',$event.target.value)"
@@ -81,19 +81,22 @@ export default {
     display: block;
     position: absolute;
     height: 12vh;
-    width: 35%;
+    width: 100%;
     overflow-y: scroll;
-    background-color: aquamarine;
+    background-color: rgb(170, 175, 173);
     margin-top: 10px;
     padding: 7px 0px;
-    box-shadow: 0px 3px 6px 1px brown;
+    box-shadow: 0px 3px 6px 1px rgb(48, 48, 48);
+    color: bisque;
 }
 .custom-citizenship{
     position: relative;
+    width: 100%;
 }
 .select-ul-item{
     margin: 0;
     padding: 4px 5px;
+    border-bottom: 1px solid rgb(68, 66, 66);
 }
 .select-ul-item:hover{
     cursor: pointer;

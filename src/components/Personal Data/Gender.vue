@@ -1,8 +1,8 @@
 <template>
   <div class="gender">
-    <h5>Пол</h5>
+    <h5 class="gender-title">Пол</h5>
     <label for="male">Мужской</label>
-    <input type="radio" id="male" name="gender" checked
+    <input type="radio" id="male" name="gender" checked class="gender-male"
       value="male"
       @input="$emit('input',$event.target.value)"
     >
@@ -22,5 +22,10 @@ export default {
 </script>
 
 <style scoped>
-
+.gender-title{
+  margin: 5px 0px;
+}
+.gender-male{
+  margin-right: 30px;
+}
 </style>

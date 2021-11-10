@@ -2,7 +2,7 @@
   <div class="question">
     <h5>Меняли ли фамилию или имя?</h5>
     <label for="no">Нет</label>
-    <input type="radio" id="no" name="changeSurname" checked
+    <input type="radio" id="no" name="changeSurname" checked class="question-no"
       value="no"
       @input="$emit('input',$event.target.value)"
     >
@@ -20,6 +20,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.question-no{
+  margin-right: 30px;
+}
 </style>

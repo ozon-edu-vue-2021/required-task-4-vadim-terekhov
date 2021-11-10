@@ -2,7 +2,7 @@
   <div class="middle-name">
     <label for="middlename">Отчество</label> 
     <br>
-    <input type="text" id="middlename"
+    <input type="text" id="middlename" class="input-all"
       :value="value"
       @input="$emit('input',$event.target.value)"
     >
@@ -19,5 +19,7 @@ export default {
 </script>
 
 <style scoped>
-
+.middle-name{
+  flex: 1 1 auto;
+}
 </style>

@@ -1,7 +1,8 @@
 <template>
   <div class="ino-type-passport">
     <label for="inotypepassport">Тип паспорта </label><br>
-    <select name="" id="inotypepassport"
+    <select name="" id="inotypepassport" class="input-all"
+      :value="value"
       @input="$emit('input',$event.target.value)"
     >
       <option disabled selected value="">Выберите тип</option>
@@ -17,6 +18,9 @@
 import type from "@/assets/data/passport-types.json";
 export default {
   name: 'inoCountryIssue',
+  props: {
+    value: String,
+  },
   data(){
     return{
       type,

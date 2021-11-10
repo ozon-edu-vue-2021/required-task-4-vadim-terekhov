@@ -1,8 +1,8 @@
 <template>
   <div class="first-sur-name">
-    <label for="firstsurname">Имя (прошлое)</label> 
+    <label for="firstsurname">Имя (предыдущее)</label> 
     <br>
-    <input type="text" id="firstsurname"
+    <input type="text" id="firstsurname" class="input-all"
       :value="value"
       @input="$emit('input',$event.target.value)"
     >
@@ -19,5 +19,7 @@ export default {
 </script>
 
 <style scoped>
-
+.first-sur-name{
+  width: 100%;
+}
 </style>
