@@ -87,6 +87,9 @@ export default class ValidationClass{
           context.Errors = context.Errors.filter(i => i.name !== 'oldSurName');
           oldSurName.classList.remove('errorItem');
         }
+      }else{
+        context.Errors = context.Errors.filter(i => i.name !== 'oldSurName');
+        oldSurName.classList.remove('errorItem')
       }
       if (context.formData.oldFirstName !== ''){
         if (!ONLY_RUS_LETTERS.test(context.formData.oldFirstName)){
@@ -98,6 +101,9 @@ export default class ValidationClass{
           context.Errors = context.Errors.filter(i => i.name !== 'oldFirstName');
           oldFirstName.classList.remove('errorItem');
         }
+      }else{
+        context.Errors = context.Errors.filter(i => i.name !== 'oldFirstName');
+        oldFirstName.classList.remove('errorItem');
       }
     }
   }
@@ -165,6 +171,11 @@ export default class ValidationClass{
         context.Errors = context.Errors.filter(i => i.name !== 'inoFirstName');
         inoFirstName.classList.remove('errorItem');
       }
+    }else{
+      context.Errors = context.Errors.filter(i => i.name !== 'inoSurName');
+      context.Errors = context.Errors.filter(i => i.name !== 'inoFirstName');
+      inoSurName.classList.remove('errorItem');
+      inoFirstName.classList.remove('errorItem');
     }
   }
 }
