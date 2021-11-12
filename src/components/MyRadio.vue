@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-radio">
-    <h5 class="gender-title">
+    <h5 class="wrapper-radio-title">
       <slot></slot>
     </h5>
 
@@ -14,7 +14,7 @@
         :id="item.id"
         :name="item.name"
         :checked="item.checked"
-        class="gender-male"
+        class="wrapper-radio-gender"
         :value="item.value"
         @input="$emit('input',$event.target.value)"
       >
@@ -34,5 +34,13 @@ export default {
 </script>
 
 <style scoped>
-
+.wrapper-radio-title{
+  margin: 10px 0px
+}
+.wrapper-radio-gender{
+  margin-right: 20px;
+}
+.wrapper-radio-gender:last-child{
+  margin-right: 0px;
+}
 </style>
