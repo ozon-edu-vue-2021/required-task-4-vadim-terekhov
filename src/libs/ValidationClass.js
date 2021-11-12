@@ -174,8 +174,8 @@ export default class ValidationClass{
     }else{
       context.Errors = context.Errors.filter(i => i.name !== 'inoSurName');
       context.Errors = context.Errors.filter(i => i.name !== 'inoFirstName');
-      inoSurName.classList.remove('errorItem');
-      inoFirstName.classList.remove('errorItem');
+      //inoSurName.classList.remove('errorItem');
+      //inoFirstName.classList.remove('errorItem');
     }
   }
 }
