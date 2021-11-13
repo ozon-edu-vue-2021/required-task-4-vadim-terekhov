@@ -230,7 +230,7 @@ export default {
       const curentDateNumber = currentDate.getDate();
       if (this.formData.dataBirth !== ''){
         const [y,m,d] = this.formData.dataBirth.split('-');
-        if (+y > curentDateYear || +m > curentDateMonth || +d > curentDateNumber){
+        if (+y > curentDateYear && +m > curentDateMonth && +d > curentDateNumber){
           this.Errors.dataBirth = 'Дата должна быть меньше текущей';
         }else{
           delete this.Errors.dataBirth;
