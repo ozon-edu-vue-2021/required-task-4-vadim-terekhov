@@ -2,7 +2,7 @@
   <div class="wrapper-input">
     <label :for="config.id">{{ config.label }}</label> 
     <br>
-    <input :type="config.type" :id="config.id" :class="config.class"
+    <input :type="config.type" :id="config.id" :class="[config.class, {error: config.error}]"
       :value="value"
       :placeholder="config.placeholder ? config.placeholder : '' "
       @input="$emit('input',$event.target.value)"
@@ -27,5 +27,8 @@ export default {
 }
 .wrapper-input:last-child{
   margin-right: 0px;
+}
+.error{
+  border: 1px solid red;
 }
 </style>
