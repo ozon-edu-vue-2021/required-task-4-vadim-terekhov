@@ -9,7 +9,7 @@
     >
       <label :for="item.id" :key="`${idx}+${item.id}`">{{ item.label }}</label>
       <input 
-        :key="idx"
+        :key="`${idx}+${item.name}`"
         :type="item.type"
         :id="item.id"
         :name="item.name"

@@ -7,7 +7,7 @@
     >
       <option disabled selected value="">{{ config.textDefault }}</option>
       <option
-        v-for="item in config.data"
+        v-for="item in data"
         :key="item.id"
       >{{ item[`${config.option}`] }}</option>
     </select>
@@ -21,6 +21,7 @@ export default {
   props: {
     config: Object,
     value: String,
+    data: Array,
   }
 }
 </script>

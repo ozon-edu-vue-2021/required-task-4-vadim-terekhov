@@ -8,8 +8,8 @@
         v-if="ErrorsArr.length > 0"
       >
         <li
-          v-for="(error,idx) in ErrorsArr"
-          :key="idx"
+          v-for="(error, idx) in ErrorsArr"
+          :key="`${idx}-${error.slice(0,3)}`"
         >{{ error }}</li>
       </ul>
       <p
@@ -21,17 +21,14 @@
       <h4>Личные данные</h4>
       <fieldset class="personal-data">
         <div class="row">
-          <my-input v-model.trim="formData.surName" :config="{id:'surname',type:'text',label:'Фамилия', class:['input-all'],error: Errors.surName ? true : false}" />
-          <my-input v-model.trim="formData.firstName" :config="{id:'firstname',type:'text',label:'Имя',class:['input-all'],error: Errors.firstName ? true : false}" />
-          <my-input v-model.trim="formData.middleName" :config="{id:'middlename',type:'text',label:'Отчество',class:['input-all'],error: Errors.middleName ? true : false}" />
+          <my-input v-model.trim="formData.surName" :config="configSurName" :classProp="'input-all'" :error="Errors.surName" />
+          <my-input v-model.trim="formData.firstName" :config="configFirstName" :classProp="'input-all'" :error="Errors.firstName" />
+          <my-input v-model.trim="formData.middleName" :config="configMiddleName" :classProp="'input-all'" :error="Errors.middleName" />
         </div>
-        <my-input v-model.trim="formData.dataBirth" :config="{id:'databirth',type:'date',label:'Дата рождения',placeholder:'дд.мм.гггг',class:['input-all'],error: Errors.dataBirth ? true : false}" />
-        <my-input v-model.trim="formData.email" :config="{id:'email',type:'text',label:'E-mail',class:['input-all'],error: Errors.email ? true : false}" />
+        <my-input v-model.trim="formData.dataBirth" :config="configDataBirth" :classProp="'input-all'" :error="Errors.dataBirth" />
+        <my-input v-model.trim="formData.email" :config="configEmail" :classProp="'input-all'" :error="Errors.email" />
         <my-radio 
-          :config="[
-            {id:'male',type:'radio',label:'Мужской',name:'gender',checked: true,value: 'male'},
-            {id:'female',type:'radio',label:'Женский',name:'gender',checked: false, value: 'female'}
-          ]"
+          :config="configGender"
           v-model.trim="formData.gender"
         >Пол</my-radio>
       </fieldset>
@@ -40,47 +37,32 @@
       <fieldset class="passport-data">
         <my-custom-select @clickItem="changeHandler" @input="changeHandler" :classProp="['input-all']"/>
         <div class="wrapper-russian-passport row" v-if="(formData.citizenshipCustom === 'Russia') ? true : false">
-          <my-input v-model.trim="formData.serialPassport" :config="{id:'serialpassport',type:'number',label:'Серия паспорта',class:['input-all'],error: Errors.serialPassport ? true : false}" />
-          <my-input v-model.trim="formData.numberPassport" :config="{id:'numberpassport',type:'number',label:'Номер паспорта',class:['input-all'],error: Errors.numberPassport ? true : false}" />
-          <my-input v-model.trim="formData.dataIssuePassport" :config="{id:'dataissuepassport',type:'date',label:'Дата выдачи',placeholder:'дд.мм.гггг',class:['input-all']}" />
+          <my-input v-model.trim="formData.serialPassport" :config="configSerialNumber" :classProp="'input-all'" :error="Errors.serialPassport" />
+          <my-input v-model.trim="formData.numberPassport" :config="configNumberPassport" :classProp="'input-all'" :error="Errors.numberPassport" />
+          <my-input v-model.trim="formData.dataIssuePassport" :config="configDataIssuePassport" :classProp="'input-all'" />
         </div>
         <div class="wrapper-ino-passport" v-if="isNationality">
           <div class="row">
-            <my-input v-model.trim="formData.inoSurName" :config="{id:'inosurname',type:'text',label:'Фамилия на латинице',class:['input-all'],error: Errors.inoSurName ? true : false}" />
-            <my-input v-model.trim="formData.inoFirstName" :config="{id:'inofirstтame',type:'text',label:'Имя на латинице',class:['input-all'],error: Errors.inoFirstName ? true : false}" />
+            <my-input v-model.trim="formData.inoSurName" :config="configInoSurName" :classProp="'input-all'" :error="Errors.inoSurName" />
+            <my-input v-model.trim="formData.inoFirstName" :config="configInoFirstName" :classProp="'input-all'" :error="Errors.inoFirstName" />
           </div>
           <div class="row">
-            <my-input v-model.trim="formData.inoNumberPassport" :config="{id:'inonumberpassport',type:'number',label:'Номер паспорта',class:['input-all']}" />
+            <my-input v-model.trim="formData.inoNumberPassport" :config="configInoNumberPassport" :classProp="'input-all'" />
             <my-select 
               v-model.trim="formData.inoCountryIssue"
-              :config="{
-                id:'inocountryissue',
-                label:'Страна выдачи',
-                textDefault: 'Выбирите страну',
-                class:['input-all'],    
-                data: nationality,
-                option: 'capital'
-              }"
+              :config="configInoCountryIssue"
+              :data="nationality"
             />
             <my-select 
               v-model.trim="formData.inoTypePassport"
-              :config="{
-                id:'inotypepassport',
-                label:'Тип паспорта',
-                textDefault: 'Выбирите тип',
-                class:['input-all'],
-                data: typePassport,
-                option: 'type'
-              }"
+              :config="configInoTypePassport"
+              :data="typePassport"
             />
           </div>
         </div>
 
         <my-radio 
-          :config="[
-            {id:'no',type:'radio',label:'Нет',name:'changeSurname',checked: true,value: 'no'},
-            {id:'yes',type:'radio',label:'Да',name:'changeSurname',checked: false, value: 'yes'}
-          ]"
+          :config="configchangeSurname"
           v-model.trim="formData.changeSurname"
         >Меняли ли фамилию или имя?</my-radio>
 
@@ -88,8 +70,8 @@
           v-show="(formData.changeSurname === 'yes') ? true : false"
           class="row"
         >
-          <my-input v-model.trim="formData.oldSurName" :config="{id:'oldsurname',type:'text',label:'Фамилия (предыдущая)',class:['input-all'],error: Errors.oldSurName ? true : false}" />
-          <my-input v-model.trim="formData.oldFirstName" :config="{id:'oldаirstтame',type:'text',label:'Имя (предыдущее)',class:['input-all'],error: Errors.oldFirstName ? true : false}" />
+          <my-input v-model.trim="formData.oldSurName" :config="configOldSurName" :classProp="'input-all'" :error="Errors.oldSurName" />
+          <my-input v-model.trim="formData.oldFirstName" :config="configOldFirstName" :classProp="'input-all'" :error="Errors.oldFirstName" />
         </div>
 
       </fieldset>
@@ -106,13 +88,21 @@ import MySelect from '@/components/MySelect.vue';
 
 import nationality from '@/assets/data/citizenships.json';
 import typePassport from "@/assets/data/passport-types.json";
+import { configSurName, configFirstName, configMiddleName, configDataBirth, configEmail, 
+configSerialNumber, configNumberPassport, configDataIssuePassport,
+configInoSurName, configInoFirstName, configInoNumberPassport,
+configOldSurName, configOldFirstName } from '@/components/ConfigForMyInput.js';
 
+import { configGender, configchangeSurname } from '@/components/ConfigForMyRadio.js';
+import { configInoCountryIssue, configInoTypePassport } from '@/components/ConfigForMySelect.js';
+
+import Validate from '@/helpers/validation.js';
 export default {
   components: {
     MyInput,
     MyRadio,
     MyCustomSelect,
-    MySelect
+    MySelect,
   },
   data() {
     return {
@@ -142,6 +132,23 @@ export default {
       Errors: {},
       ErrorsArr: [],
       hasChange: false,
+      configSurName,
+      configFirstName,
+      configMiddleName,
+      configDataBirth,
+      configEmail,
+      configGender,
+      configSerialNumber,
+      configNumberPassport,
+      configDataIssuePassport,
+      configInoSurName,
+      configInoFirstName,
+      configInoNumberPassport,
+      configInoCountryIssue,
+      configInoTypePassport,
+      configchangeSurname,
+      configOldSurName,
+      configOldFirstName,
     };
   },
   computed:{
@@ -172,13 +179,6 @@ export default {
       }
       return flag;
     },
-    ValidationField(data,err,fieldErr,text,regExp){
-      if (!regExp.test(data) && data !== ''){
-        err[fieldErr] = text;
-      }else{
-        delete err[fieldErr];
-      }
-    },
     changeHandler(citizenship){
       this.formData.citizenshipCustom = citizenship;
       if (this.isNationality === undefined){
@@ -201,42 +201,7 @@ export default {
       }else{
         this.hasChange = false;
       }
-      //Серия паспорта - 4 цифры
-      const FOUR_DIGITAL = /^[0-9]{4}$/;
-      this.ValidationField(this.formData.serialPassport,this.Errors,'serialPassport','Серия паспорта должна быть 4 цифры',FOUR_DIGITAL);
-      //Номер паспорта - 6 цифр для гражданства Россия и любое значение для других гражданств
-      const SIX_DIGITAL = /^[0-9]{6}$/;
-      this.ValidationField(this.formData.numberPassport,this.Errors,'numberPassport','Номер паспорта должна быть 6 цифр',SIX_DIGITAL);
-      //Фамилия, Имя, Отчество, Предыдущая Фамилия, Предыдущее Имя- только русские буквы
-      const ONLY_RUS_LETTERS = /^[А-Яа-я]+$/;
-      this.ValidationField(this.formData.surName,this.Errors,'surName','Фамилия только русскими буквами',ONLY_RUS_LETTERS);
-      this.ValidationField(this.formData.firstName,this.Errors,'firstName','Имя только русскими буквами',ONLY_RUS_LETTERS);
-      this.ValidationField(this.formData.middleName,this.Errors,'middleName','Отчество только русскими буквами',ONLY_RUS_LETTERS);
-
-      this.ValidationField(this.formData.oldSurName,this.Errors,'oldSurName','Фамилия (предыдущая) только русскими буквами',ONLY_RUS_LETTERS);
-      this.ValidationField(this.formData.oldFirstName,this.Errors,'oldFirstName','Имя (предыдущее) только русскими буквами',ONLY_RUS_LETTERS);
-
-      //E-mail - валидный почтовый адрес
-      const VALID_EMAIL = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      this.ValidationField(this.formData.email,this.Errors,'email','Email должен быть корректным',VALID_EMAIL);
-      //Фамилия на латинице и Имя на латинице - только английские буквы
-      const ONLY_ENG_LETTERS = /^[A-Za-z]+$/;
-      this.ValidationField(this.formData.inoSurName,this.Errors,'inoSurName','Фамилия только латинскими буквами при выборе иностранного гражданства',ONLY_ENG_LETTERS);
-      this.ValidationField(this.formData.inoFirstName,this.Errors,'inoFirstName','Имя только латинскими буквами при выборе иностранного гражданства',ONLY_ENG_LETTERS);
-      //Дата Рождения - валидная дата, не позже сегодняшнего числа
-      const currentDate = new Date();
-      const curentDateYear = currentDate.getFullYear();
-      const curentDateMonth = currentDate.getMonth() + 1;
-      const curentDateNumber = currentDate.getDate();
-      if (this.formData.dataBirth !== ''){
-        const [y,m,d] = this.formData.dataBirth.split('-');
-        if (+y > curentDateYear && +m > curentDateMonth && +d > curentDateNumber){
-          this.Errors.dataBirth = 'Дата должна быть меньше текущей';
-        }else{
-          delete this.Errors.dataBirth;
-        }
-      }
-      
+      Validate(this);
       /*---------------------------------------------------------------------------- */
       this.ErrorsArr = Object.keys(this.Errors).map(item => this.Errors[item]);
       if (this.ErrorsArr.length === 0 && this.hasChange === true){

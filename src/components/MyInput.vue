@@ -2,7 +2,8 @@
   <div class="wrapper-input">
     <label :for="config.id">{{ config.label }}</label> 
     <br>
-    <input :type="config.type" :id="config.id" :class="[config.class, {error: config.error}]"
+    <input :type="config.type" :id="config.id" 
+      :class="[classProp, {error: hasError}]"
       :value="value"
       :placeholder="config.placeholder ? config.placeholder : '' "
       @input="$emit('input',$event.target.value)"
@@ -16,6 +17,13 @@ export default {
   props: {
     config: Object,
     value: String,
+    classProp: String,
+    error: String,
+  },
+  computed:{
+    hasError(){
+      return this.error ? true : false;
+    }
   }
 }
 </script>
