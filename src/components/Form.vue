@@ -21,14 +21,14 @@
       <h4>Личные данные</h4>
       <fieldset class="personal-data">
         <div class="row">
-          <my-input v-model.trim="formData.surName" :config="configSurName" :classProp="'input-all'" :error="Errors.surName" />
-          <my-input v-model.trim="formData.firstName" :config="configFirstName" :classProp="'input-all'" :error="Errors.firstName" />
-          <my-input v-model.trim="formData.middleName" :config="configMiddleName" :classProp="'input-all'" :error="Errors.middleName" />
+          <my-input v-model.trim="formData.surName" :config="configFieldsInputs.configSurName" :classProp="'input-all'" :error="Errors.surName" />
+          <my-input v-model.trim="formData.firstName" :config="configFieldsInputs.configFirstName" :classProp="'input-all'" :error="Errors.firstName" />
+          <my-input v-model.trim="formData.middleName" :config="configFieldsInputs.configMiddleName" :classProp="'input-all'" :error="Errors.middleName" />
         </div>
-        <my-input v-model.trim="formData.dataBirth" :config="configDataBirth" :classProp="'input-all'" :error="Errors.dataBirth" />
-        <my-input v-model.trim="formData.email" :config="configEmail" :classProp="'input-all'" :error="Errors.email" />
+        <my-input v-model.trim="formData.dataBirth" :config="configFieldsInputs.configDataBirth" :classProp="'input-all'" :error="Errors.dataBirth" />
+        <my-input v-model.trim="formData.email" :config="configFieldsInputs.configEmail" :classProp="'input-all'" :error="Errors.email" />
         <my-radio 
-          :config="configGender"
+          :config="configFieldsRadio.configGender"
           v-model.trim="formData.gender"
         >Пол</my-radio>
       </fieldset>
@@ -37,32 +37,32 @@
       <fieldset class="passport-data">
         <my-custom-select @clickItem="changeHandler" @input="changeHandler" :classProp="['input-all']"/>
         <div class="wrapper-russian-passport row" v-if="(formData.citizenshipCustom === 'Russia') ? true : false">
-          <my-input v-model.trim="formData.serialPassport" :config="configSerialNumber" :classProp="'input-all'" :error="Errors.serialPassport" />
-          <my-input v-model.trim="formData.numberPassport" :config="configNumberPassport" :classProp="'input-all'" :error="Errors.numberPassport" />
-          <my-input v-model.trim="formData.dataIssuePassport" :config="configDataIssuePassport" :classProp="'input-all'" />
+          <my-input v-model.trim="formData.serialPassport" :config="configFieldsInputs.configSerialNumber" :classProp="'input-all'" :error="Errors.serialPassport" />
+          <my-input v-model.trim="formData.numberPassport" :config="configFieldsInputs.configNumberPassport" :classProp="'input-all'" :error="Errors.numberPassport" />
+          <my-input v-model.trim="formData.dataIssuePassport" :config="configFieldsInputs.configDataIssuePassport" :classProp="'input-all'" />
         </div>
         <div class="wrapper-ino-passport" v-if="isNationality">
           <div class="row">
-            <my-input v-model.trim="formData.inoSurName" :config="configInoSurName" :classProp="'input-all'" :error="Errors.inoSurName" />
-            <my-input v-model.trim="formData.inoFirstName" :config="configInoFirstName" :classProp="'input-all'" :error="Errors.inoFirstName" />
+            <my-input v-model.trim="formData.inoSurName" :config="configFieldsInputs.configInoSurName" :classProp="'input-all'" :error="Errors.inoSurName" />
+            <my-input v-model.trim="formData.inoFirstName" :config="configFieldsInputs.configInoFirstName" :classProp="'input-all'" :error="Errors.inoFirstName" />
           </div>
           <div class="row">
-            <my-input v-model.trim="formData.inoNumberPassport" :config="configInoNumberPassport" :classProp="'input-all'" />
+            <my-input v-model.trim="formData.inoNumberPassport" :config="configFieldsInputs.configInoNumberPassport" :classProp="'input-all'" />
             <my-select 
               v-model.trim="formData.inoCountryIssue"
-              :config="configInoCountryIssue"
+              :config="configFieldsSelect.configInoCountryIssue"
               :data="nationality"
             />
             <my-select 
               v-model.trim="formData.inoTypePassport"
-              :config="configInoTypePassport"
+              :config="configFieldsSelect.configInoTypePassport"
               :data="typePassport"
             />
           </div>
         </div>
 
         <my-radio 
-          :config="configchangeSurname"
+          :config="configFieldsRadio.configchangeSurname"
           v-model.trim="formData.changeSurname"
         >Меняли ли фамилию или имя?</my-radio>
 
@@ -70,8 +70,8 @@
           v-show="(formData.changeSurname === 'yes') ? true : false"
           class="row"
         >
-          <my-input v-model.trim="formData.oldSurName" :config="configOldSurName" :classProp="'input-all'" :error="Errors.oldSurName" />
-          <my-input v-model.trim="formData.oldFirstName" :config="configOldFirstName" :classProp="'input-all'" :error="Errors.oldFirstName" />
+          <my-input v-model.trim="formData.oldSurName" :config="configFieldsInputs.configOldSurName" :classProp="'input-all'" :error="Errors.oldSurName" />
+          <my-input v-model.trim="formData.oldFirstName" :config="configFieldsInputs.configOldFirstName" :classProp="'input-all'" :error="Errors.oldFirstName" />
         </div>
 
       </fieldset>
@@ -88,13 +88,10 @@ import MySelect from '@/components/MySelect.vue';
 
 import nationality from '@/assets/data/citizenships.json';
 import typePassport from "@/assets/data/passport-types.json";
-import { configSurName, configFirstName, configMiddleName, configDataBirth, configEmail, 
-configSerialNumber, configNumberPassport, configDataIssuePassport,
-configInoSurName, configInoFirstName, configInoNumberPassport,
-configOldSurName, configOldFirstName } from '@/components/ConfigForMyInput.js';
+import { configFieldsInputs } from '@/components/ConfigForMyInput.js';
 
-import { configGender, configchangeSurname } from '@/components/ConfigForMyRadio.js';
-import { configInoCountryIssue, configInoTypePassport } from '@/components/ConfigForMySelect.js';
+import { configFieldsRadio } from '@/components/ConfigForMyRadio.js';
+import { configFieldsSelect } from '@/components/ConfigForMySelect.js';
 
 import Validate from '@/helpers/validation.js';
 export default {
@@ -132,23 +129,9 @@ export default {
       Errors: {},
       ErrorsArr: [],
       hasChange: false,
-      configSurName,
-      configFirstName,
-      configMiddleName,
-      configDataBirth,
-      configEmail,
-      configGender,
-      configSerialNumber,
-      configNumberPassport,
-      configDataIssuePassport,
-      configInoSurName,
-      configInoFirstName,
-      configInoNumberPassport,
-      configInoCountryIssue,
-      configInoTypePassport,
-      configchangeSurname,
-      configOldSurName,
-      configOldFirstName,
+      configFieldsInputs,
+      configFieldsRadio,
+      configFieldsSelect,
     };
   },
   computed:{
