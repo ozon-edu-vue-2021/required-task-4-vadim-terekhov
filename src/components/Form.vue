@@ -92,7 +92,7 @@ import { configFieldsInputs } from '@/components/ConfigForMyInput.js';
 
 import { configFieldsRadio } from '@/components/ConfigForMyRadio.js';
 import { configFieldsSelect } from '@/components/ConfigForMySelect.js';
-
+import formData from '@/components/FormData.js'
 import Validate from '@/helpers/validation.js';
 export default {
   components: {
@@ -103,27 +103,7 @@ export default {
   },
   data() {
     return {
-      formData: {
-        surName: '',
-        firstName: '',
-        middleName: '',
-        dataBirth: '',
-        email: '',
-        gender: 'male',
-        citizenship: '',
-        changeSurname: 'no',
-        oldSurName: '',
-        oldFirstName: '',
-        serialPassport: '',
-        numberPassport: '',
-        dataIssuePassport: '',
-        inoFirstName: '',
-        inoSurName: '',
-        inoNumberPassport: '',
-        inoCountryIssue: '',
-        inoTypePassport: '',
-        citizenshipCustom: '',
-      },
+      formData,
       nationality,
       typePassport,
       Errors: {},
